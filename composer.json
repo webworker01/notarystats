@@ -1,0 +1,14 @@
+{
+    "name": "webworker01/notarystats",
+    "description": "Script for Komoodo Notary Stats",
+    "type": "project",
+    "license": "GPL v3",
+    "authors": [
+        {
+            "name": "webworker01"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
