@@ -99,7 +99,7 @@ class komodo
         while ($currentblock < $endblock) {
             $currentendblock = ($currentblock + $step < $endblock) ? $currentblock + $step : $endblock;
 
-            echo "Scanning blocks " . $currentblock . " to " . ($currentblock + $step) . "\n\n";
+            echo "Scanning blocks " . $currentblock . " to " . $currentendblock . "\n\n";
 
             $notarizations = $this->rpc('getaddresstxids', [['addresses' => [$notarizationAddress], 'start' => $currentblock, 'end' => $currentendblock]] );
 
