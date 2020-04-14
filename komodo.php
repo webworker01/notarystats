@@ -1,77 +1,77 @@
 <?php
 
-class komodo 
+class komodo
 {
     protected $config;
     protected $guzzle;
     protected $ignoreacs = ['BEER', 'PIZZA', 'VOTE2018'];
     protected $notarizers = [];
-    
-    protected $notary2018 = [
-        'RNJmgYaFF5DbnrNUX6pMYz9rcnDKC2tuAc'=>'0dev1_jl777',
-        'RLj9h7zfnx4X9hvquR3sEwzHvcvF61W2Rc'=>'0dev2_kolo',
-        'RTZi9uC1wEu3PD9eoL4R7KyeAse7uvdHuS'=>'0dev3_kolo',
-        'RDECKVXcWCgPpMrKqQmMX7PxzQVLCzcR5a'=>'0dev4_decker',
-        'RSuXRScqHNbRFqjur2C3tf3oDoauBs2B1i'=>'a-team_SH',
-        'RXF3aHUaWDUY4fRRYmBNALoHWkgSQCiJ4f'=>'artik_AR',
-        'RL2SkPSCGMvcHqZ56ErfMxbQGdA4nk7MZp'=>'artik_EU',
-        'RFssbc211PJdVy1bvcvAG5X2N4ovPAoy5o'=>'artik_NA',
-        'RNoz2DKPZ2ppMxgYx5tce9sjZBHefvPvNB'=>'artik_SH',
-        'RVxtoUT9CXbC1LdhztNAf9yR5ySnFnSPQh'=>'badass_EU',
-        'R9XBrbj8iKkwy9M4erUqRaBinAiZSTXav3'=>'badass_NA',
-        'RVvcVXkqWmMmjQdFnqwQbtPrdU7DFpHA3G'=>'batman_AR',
-        'RY5TZSnmtGZLFMpnJTE6gDRyk1zDvMktcc'=>'batman_SH',
-        'RUvwCVA1NfDB6ZWrEgVYZHWGjMzpxm19r1'=>'0x_DEVSEC',
-        'RSQUoSfM7R7SnatK6Udsb5t39movCpUKQE'=>'chainmakers_EU',
-        'RLF3sBrXAdofwDnS2114mkBMSBeJDd5Doy'=>'chainmakers_NA',
-        'RXrQPqU4SwARri1m2n7232TDECvjzXCJh4'=>'chainstrike_SH',
-        'RBZxvAMqt1QhkvmiMRqDGRBW9QaQjqPEpF'=>'cipi_AR',
-        'RD2uPC7aUkX9tQTYgRvDb2HQPWa22VttEE'=>'cipi_NA',
-        'RA7nJEoqNGu13P7Gv4mWfoJTmpZ9ac2Bh2'=>'crackers_EU',
-        'RQcBfvJLyB96GCuTBRUNckQESw8LYjHQaC'=>'crackers_NA',
-        'RWVt3CDvXXAw5NeyMrjUC8s7YssAJ9j4A4'=>'dwy_EU',
-        'RBHCkuYMUbQph7MZsHcZYfGfyqBm8Y4jFQ'=>'emmanux_SH',
-        'RPjUmFNcWEW9Bu275kPxzRXyWDz6bfQpPD'=>'etszombi_EU',
-        'RAtXFwGsgtsHJGuKhJBMbB8vri3SRVQYeu'=>'fullmoon_AR',
-        'RAtyzPtx7yeH7jhFkD7e2dhf2p429Cn3tQ'=>'fullmoon_NA',
-        'R9WsywChUgTumbK2cf1RdjHrWMZV3nfs3a'=>'fullmoon_SH',
-        'RHzbQkW7oLK43GKEPK78rSCs7WDiaa4dbw'=>'goldenman_EU',
-        'RFQNjTfcvSAmf8D83og1NrdHj1wH2fc5X4'=>'indenodes_AR',
-        'RPknkGAHMwUBvfKQfvw9FyatTZzicSiN4y'=>'indenodes_EU',
-        'RMqbQz4NPNbG15QBwy9EFvLn4NX5Fa7w5g'=>'indenodes_NA',
-        'RQipE6ycbVVb9vCkhqrK8PGZs2p5YmiBtg'=>'indenodes_SH',
-        'RUc5sa136Agwb9dSfMKn1oc7myHkUzeZf4'=>'jackson_AR',
-        'RCA8H1npFPW5pnJRzycF8tFEJmn6XZhD4j'=>'jeezy_EU',
-        'RJD5jRidYW9Cu8qxjg9HDCsx6J3A4wQ4LU'=>'karasugoi_NA',
-        'RWgpXEycP4rVkFp3j7WzV6E2LfR842WswN'=>'komodoninja_EU',
-        'RVAUHZ4QGzxmW815b98oMv943FCms6AzUi'=>'komodoninja_SH',
-        'RGxBQho3stt6EiApWTzFZxDvqqsM8GwAuk'=>'komodopioneers_SH',
-        'RHuUpCbaGbv27fsjC1p6xwtwRzKQ1exqaA'=>'libscott_SH',
-        'RPxsaGNqTKzPnbm5q7QXwu7b6EZWuLxJG3'=>'lukechilds_AR',
-        'RQ5JmyvjzGMxZvs2auTabXVQeuxrA2oBjy'=>'madmax_AR',
-        'RV8Khq8SbYQALx9eMQ8meseWpFiZS8seL1'=>'meshbits_AR',
-        'RH1vUjh6JBX7dpPR3C89U8hzErp1uoa2by'=>'meshbits_SH',
-        'RKdXYhrQxB3LtwGpysGenKFHFTqSi5g7EF'=>'metaphilibert_AR',
-        'RRrqjqDPZ9XC6xJMeKgf7GNHjiU88hJQ16'=>'metaphilibert_SH',
-        'RBp1xHCAb3XcLAV49F8wUYw3aBvhHKKEwa'=>'patchkez_SH',
-        'REX8jNcUki4NyNde3ovr5ZgjwnCyRZYczv'=>'pbca26_NA',
-        'RH2Tuan5wt9x19aBPgTHPtkh2koWCEsjEK'=>'peer2cloud_AR',
-        'RSp8vhyL6hN3yqn5V1qje62pBgBE9fv3Eh'=>'peer2cloud_SH',
-        'RE3P8D8rcWZBeKmT8DURPdezW87MU5Ho3F'=>'polycryptoblog_NA',
-        'RTWpNfpcQgGYnrtgdUyqoPiF9r2CJoAw6Z'=>'hyper_AR',
-        'RQMyeeSyKFUTd7cYTM1Fq7nSt6zJZKNubi'=>'hyper_EU',
-        'RFCZc3SnyEtUTSVDkHEvrm7tCdhiDMufLx'=>'hyper_SH',
-        'RTdEgZV1QEsBTphiRRdk4FcstTBJ8wAkRX'=>'hyper_NA',
-        'RWPhKTa5Huepz19TYrxAE65rQn3D3xPrNw'=>'popcornbag_AR',
-        'RVQAwUJdFVVK2Pjiq4rYkvMSiZucHtJA7X'=>'popcornbag_NA',
-        'RBHzJTW73U3nyHyxBwiG92bJckxZowPY87'=>'alien_devA',
-        'RUdfZrpAhYyT4LVz6Vyj2K14yK1uC2K4Dz'=>'alien_devE',
-        'RAusaHRqdMmML3szif3Wai1ZSEWCyu7X9Y'=>'thegaltmines_NA',
-        'RWk4WLiAv6MKWLozJbj1jyhayKtjwbtX7M'=>'titomane_AR',
-        'RCTgouafkve3rCSaqmm89TUpKGvQSTFr5M'=>'titomane_EU',
-        'RAqoFL81YGFJ7hidAYUw2rzX8wjFKPCecP'=>'titomane_SH',
-        'RMbNsa4Nf3BAd16BQaAAmfzAgnuorUDrCr'=>'webworker01_NA',
-        'RLQoAcs1RaqW1xfN2NJwoZWW5twexPhuGB'=>'xrobesx_NA'
+
+    protected $notary2019 = [
+        'RVrtLPvKrszs7zSggTsXPYsbxc5SwALiEN' => 'alien_AR',
+        'RALiENAgeHExyyEnBARdZdwWbHWokoUbtc' => 'alien_EU',
+        'RJvnmHEXt2me6bjV1Lio2WigULptRtuGT2' => 'alright_AR',
+        'RUAShFaDNpHixyp7jFZu3EWph1DtC1AHwr' => 'and1-89_EU',
+        'RMMWFSKZhX4m7cj5gXzrUakidgS4MoKeK4' => 'blackjok3r_SH',
+        'RTUcZwZLVSot4awgcYBzqbLXjXtxWrtSb1' => 'ca333_DEV',
+        'RChainEuLGzkjVWaUPmAphawbSyfF3KXZb' => 'chainmakers_EU',
+        'RChainNacqqXCpPh8qRKEDXS5gvLJQpMjS' => 'chainmakers_NA',
+        'RM9c7nGctj8WsJ1bKXW4JZNGpqC8MPfBVw' => 'chainstrike_SH',
+        'REaiPC7VrrQ2Sa2SJaLdYTzEaUiB34NrmW' => 'chainzilla_SH',
+        'RYY4ajQfC4GE6WA8wn5wR7BYdJDbCC7H2x' => 'chmex_EU',
+        'RBZxvAMqt1QhkvmiMRqDGRBW9QaQjqPEpF' => 'cipi_AR',
+        'RD2uPC7aUkX9tQTYgRvDb2HQPWa22VttEE' => 'cipi_NA',
+        'RCGxNA1xHinKkcC6gf7BpxAt3wLeqcpch4' => 'computergenie_NA',
+        'RQq6fWoy8aGGMLjvRfMY5mBNVm2RQxJyLa' => 'cryptoeconomy_EU',
+        'RPr9xBwyRUvsXd1DD1MVpkbmFs1UnB9rd4' => 'd0ct0r_NA',
+        'RSKDECKERyuopK3gd3SQHH9qkngsfWrjXy' => 'decker_AR',
+        'RDECKVXcWCgPpMrKqQmMX7PxzQVLCzcR5a' => 'decker_DEV',
+        'RRfUCLxfT5NMpxsC9GHVbdfVy5WJnJFQLV' => 'dragonhound_NA',
+        'RY7kqi4ePxMPGxwawkiT6rK6vncVfxdQRb' => 'dwy_EU',
+        'RFE6nkXV7QKBs9MA7pn7dTNRBS8UGjDGaM' => 'dwy_SH',
+        'RDBzwiP8V2TrmXvCyvwU2Xz3t9UgPKL4nr' => 'etszombi_AR',
+        'RT6SAVW189Vw5gsLfQv5AnDcyq2WJcv1WZ' => 'etszombi_EU',
+        'RWxiQzksyfhDcARnPWe852naEqgpCVJkeE' => 'fullmoon_AR',
+        'RLP5JHpfD7M1NmDikLazhCoDWwgH2Ud1FY' => 'fullmoon_NA',
+        'RXwa2sLSHJFL5JQtaWUu1dGZfRrXbB3wkj' => 'fullmoon_SH',
+        'RWRiWALUo5SUAwmkGcCDh8auzcjoue2WUK' => 'gt_AR',
+        'RFQNjTfcvSAmf8D83og1NrdHj1wH2fc5X4' => 'indenodes_AR',
+        'RPknkGAHMwUBvfKQfvw9FyatTZzicSiN4y' => 'indenodes_EU',
+        'RMqbQz4NPNbG15QBwy9EFvLn4NX5Fa7w5g' => 'indenodes_NA',
+        'RQipE6ycbVVb9vCkhqrK8PGZs2p5YmiBtg' => 'indenodes_SH',
+        'R9yxJm6DtgyxgGz2BsfXZUtxNq23diZi93' => 'infotech_DEV',
+        'RVxow6SGPCjL2TxfTcztxMWeJWgS5rZTE6' => 'jeezy_EU',
+        'RJD5jRidYW9Cu8qxjg9HDCsx6J3A4wQ4LU' => 'karasugoi_NA',
+        'RCATSaEH51yTTqYPa7N5L1ybAsnwsBv5kd' => 'kolo_DEV',
+        'RAZ6dERVx3kLin3sQsXG8wRNsQ7q4tddWf' => 'komodopioneers_EU',
+        'RNzWZxVKbXnzxdyPbWj2mBwVPHaTJKqekY' => 'komodopioneers_SH',
+        'RGerhyyJWjpcYrYV7UCNBkCgV4gPZFkiWb' => 'lukechilds_AR',
+        'RNsTpcUJEzn18eBP5WYH3or2zRhpXC7iae' => 'lukechilds_NA',
+        'RKwE4bzJKLGazP9utkVG5PCgAiTavq2Tea' => 'madmax_AR',
+        'RJdoxr1CeY2wXobq59VJbMrBMcsm7ZxuB1' => 'madmax_NA',
+        'RKdXYhrQxB3LtwGpysGenKFHFTqSi5g7EF' => 'metaphilibert_AR',
+        'RRrqjqDPZ9XC6xJMeKgf7GNHjiU88hJQ16' => 'metaphilibert_SH',
+        'RHBLsSnuGyvgJTMM2drV7Lq7wdT5WXZHbU' => 'node-9_EU',
+        'RFzhf56gWgfmG7VSHxJwZYenWKxYdHhxUh' => 'nutellalicka_SH',
+        'RJ4ppJpmRs3DMGJoDJgYMSi1pMattZW6dw' => 'patchkez_SH',
+        'RMZHMdSAJrGzsKp7xUtLtYizBf9L8eVawZ' => 'pbca26_NA',
+        'RVHD1uRBksEw12cwQaAzW7HxeGcHRpnHnm' => 'peer2cloud_AR',
+        'RPHBA261gwjxUw2PZH5sj7osHFRQxuFi28' => 'phba2061_EU',
+        'RYTWfHVK5p8jeXye4rxcPB3W8Y9T5AV2U6' => 'phm87_SH',
+        'RU2RqFrjwy4kauANnzK1JWyDVAx47z51qw' => 'pirate_AR',
+        'RTPBi5hpdSUARnh9gGahv6tr4ppHDwAkxD' => 'pirate_EU',
+        'RLd2y5XN9ignMvFEaZjEZwPLi9nRmq5sv5' => 'pirate_NA',
+        'RQrGQjuoHHxFxDX1RBkB65ZPFoNpWgdTDx' => 'pungocloud_SH',
+        'RE5LbcDGRT7naQoX8dcEG7vvnJmUK5eXhu' => 'strob_NA',
+        'RJX9LtFB9RXQ2wKKi4byUJ5p42ZaiWSaiZ' => 'thegaltmines_NA',
+        'RRumqyui4uxWHmf9AaN5PKgRwtmwYc2nze' => 'titomane_AR',
+        'RXfzAJFk56KGwUvaD73guri1RyyE7hAahz' => 'titomane_EU',
+        'RDDZ2RXHBmwyB3HLXd9rS2n98DbdJu1ywM' => 'titomane_SH',
+        'RWZtikHgcyu6j6f96j9b1j4xPihZrT2NV4' => 'tonyl_AR',
+        'RF2v51CPnoYJcq3RQmiM1THnob4Ki76wdv' => 'voskcoin_EU',
+        'RQgQ19Hh1dMKdkSwsBZXsURBjKh7XS5obb' => 'webworker01_NA',
+        'RNdPnDPbMtJSMYaEU9n9kJF2xorazkRc15' => 'webworker01_SH',
+        'RYB6wbNGkJHMzJnTkqBw5ghcLH85EqAxMD' => 'zatjum_SH'
     ];
 
     public function __construct($config)
@@ -83,14 +83,21 @@ class komodo
     public function getNotarizationCount()
     {
         $notarizationAddress = 'RXL3YXG2ceaB6C5hfJcN4fvmLH2C34knhA';
-        $startblock = 814000;
-        $endblock = 1307200;
+
+        // season 3 - (kmd block 1444000 btc block ~ 585548 txid ff603c48f1e3958de4b170e84c85322a55bae2097c2ea2b659a3bd89617b6fb1)
+        // timefilter=1563202267
+        // season 3 ACs - 2019-07-15 00:00 UTC (kmd block 1443129)
+        // timefilter2=1563148800
+        // Autoelection announcement: April 12th - cutoff time: April 12th 2020, 12pm UTC
+
+        $startblock = 1444000;
+        $endblock = 1831778;
 
         //Only count KMD->BTC after this timestamp (block 814000)
-        $kmdfilter=1525032458;
+        $kmdfilter=1563202267;
 
         //Second time filter for assetchains (SuperNET commit 07515fb) ~block 821657
-        $acfilter=1525513998;
+        $acfilter=1563148800;
 
         $step = 4999;
 
@@ -133,7 +140,7 @@ class komodo
 
         return $this->notarizers;
     }
-    
+
     protected function notarizerOutput()
     {
         $format = "%20s %5s %8s %8s";
@@ -142,7 +149,7 @@ class komodo
 
         $column = 1;
 
-        foreach ($this->notary2018 as $address => $name) {
+        foreach ($this->notary2019 as $address => $name) {
             $kmd = $this->notarizers[$address]['kmd'];
             $ac = $this->notarizers[$address]['ac'];
             $score = floor($kmd + ($ac/3));
@@ -244,7 +251,7 @@ class komodo
         }
 
         $notarization_data['extractName'] = $extractName;
-        
+
         return $notarization_data;
     }
 }
